@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".fragment.InputFragment"
+    android:paddingTop="50dp">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        card_view:cardCornerRadius="15dp"
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transaksi"
+                android:textStyle="bold"
+                android:id="@+id/judul"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@id/icon"
+                android:layout_marginLeft="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Input Transaksi"
+                android:id="@+id/Deskripsi"
+                android:layout_toRightOf="@id/icon"
+                android:layout_below="@id/judul"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        card_view:cardCornerRadius="15dp"
+        android:id="@+id/cardView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp"
+        android:elevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/icon1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Keterangan Investasi"
+                android:textStyle="bold"
+                android:id="@+id/judul1"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@id/icon1"
+                android:layout_marginLeft="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Input Keterangan Investasi"
+                android:id="@+id/Deskripsi1"
+                android:layout_toRightOf="@id/icon1"
+                android:layout_below="@id/judul1"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        card_view:cardCornerRadius="15dp"
+        android:id="@+id/cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/icon2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Keterangan Pinjam"
+                android:textStyle="bold"
+                android:id="@+id/judul2"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@id/icon2"
+                android:layout_marginLeft="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Keterangan Pinjam"
+                android:id="@+id/Deskripsi2"
+                android:layout_toRightOf="@id/icon2"
+                android:layout_below="@id/judul2"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        card_view:cardCornerRadius="15dp"
+        android:id="@+id/cardView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:elevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/icon3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Belanja Produk"
+                android:textStyle="bold"
+                android:id="@+id/judul3"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@id/icon3"
+                android:layout_marginLeft="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Input Belanja Produk"
+                android:id="@+id/Deskripsi3"
+                android:layout_toRightOf="@id/icon3"
+                android:layout_below="@id/judul3"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+
+</LinearLayout>
