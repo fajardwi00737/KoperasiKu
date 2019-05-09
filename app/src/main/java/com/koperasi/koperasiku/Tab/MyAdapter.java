@@ -20,7 +20,7 @@ import com.koperasi.koperasiku.fragment.TransaksiFragment;
 
 public class MyAdapter extends FragmentPagerAdapter {
     private Context mContext;
-    private String[] titles ={"A","B"};
+    private String[] titles ={"Input","History"};
     int[] icon = new int[]{R.drawable.ic_launcher_background, R.drawable.ic_launcher_background};
     private int heightIcon;
 

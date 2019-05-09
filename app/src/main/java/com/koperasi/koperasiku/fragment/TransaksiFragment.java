@@ -84,4 +84,7 @@ public class TransaksiFragment extends Fragment{
             }
         });
     }
+
+    public interface OnFragmentInteractionListener {
+    }
 }

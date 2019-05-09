@@ -61,5 +61,8 @@ public class InputFragment extends Fragment{
             }
         });
     }
+
+    public interface OnFragmentInteractionListener {
+    }
 }
 
