@@ -29,8 +29,10 @@ public class TampilPegawai extends AppCompatActivity implements View.OnClickList
 
     private EditText editTextId;
     private EditText editTextName;
-    private EditText editTextDesg;
-    private EditText editTextSalary;
+    private EditText editTextdaerah;
+    private EditText editTextkamar;
+    private EditText editTextSaldo;
+
 
     private Button buttonUpdate;
     private Button buttonDelete;
@@ -47,9 +49,10 @@ public class TampilPegawai extends AppCompatActivity implements View.OnClickList
         id = intent.getStringExtra(konfigurasi.EMP_ID);
 
         editTextId = (EditText) findViewById(R.id.editTextId);
-        editTextName = (EditText) findViewById(R.id.editTextName);
-        editTextDesg = (EditText) findViewById(R.id.editTextDesg);
-        editTextSalary = (EditText) findViewById(R.id.editTextSalary);
+        editTextName = (EditText) findViewById(R.id.editTextNama);
+        editTextdaerah = (EditText) findViewById(R.id.editTextDaerah);
+        editTextkamar = (EditText) findViewById(R.id.editTextKamar);
+        editTextSaldo = (EditText) findViewById(R.id.editTextSaldo);
 
         buttonUpdate = (Button) findViewById(R.id.buttonUpdate);
         buttonDelete = (Button) findViewById(R.id.buttonDelete);
@@ -94,13 +97,17 @@ public class TampilPegawai extends AppCompatActivity implements View.OnClickList
             JSONObject jsonObject = new JSONObject(json);
             JSONArray result = jsonObject.getJSONArray(konfigurasi.TAG_JSON_ARRAY);
             JSONObject c = result.getJSONObject(0);
+
             String name = c.getString(konfigurasi.TAG_NAMA);
-            String desg = c.getString(konfigurasi.TAG_POSISI);
-            String sal = c.getString(konfigurasi.TAG_GAJIH);
+            String desg = c.getString(konfigurasi.TAG_DAERAH);
+            String sal = c.getString(konfigurasi.TAG_KAMAR);
+            String saldo = c.getString(konfigurasi.TAG_SALDO);
+
 
             editTextName.setText(name);
-            editTextDesg.setText(desg);
-            editTextSalary.setText(sal);
+            editTextdaerah.setText(desg);
+            editTextkamar.setText(sal);
+            editTextSaldo.setText(saldo);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -110,8 +117,9 @@ public class TampilPegawai extends AppCompatActivity implements View.OnClickList
 
     private void updateEmployee(){
         final String name = editTextName.getText().toString().trim();
-        final String desg = editTextDesg.getText().toString().trim();
-        final String salary = editTextSalary.getText().toString().trim();
+        final String desg = editTextdaerah.getText().toString().trim();
+        final String salary = editTextkamar.getText().toString().trim();
+        final String saldo = editTextSaldo.getText().toString().trim();
 
         class UpdateEmployee extends AsyncTask<Void,Void,String>{
             ProgressDialog loading;
@@ -133,8 +141,9 @@ public class TampilPegawai extends AppCompatActivity implements View.OnClickList
                 HashMap<String,String> hashMap = new HashMap<>();
                 hashMap.put(konfigurasi.KEY_EMP_ID,id);
                 hashMap.put(konfigurasi.KEY_EMP_NAMA,name);
-                hashMap.put(konfigurasi.KEY_EMP_POSISI,desg);
-                hashMap.put(konfigurasi.KEY_EMP_GAJIH,salary);
+                hashMap.put(konfigurasi.KEY_EMP_DAERAH,desg);
+                hashMap.put(konfigurasi.KEY_EMP_KAMAR,salary);
+                hashMap.put(konfigurasi.KEY_EMP_SALDO,saldo);
 
                 RequestHandler rh = new RequestHandler();
 

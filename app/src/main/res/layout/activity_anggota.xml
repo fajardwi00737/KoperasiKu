@@ -7,35 +7,71 @@
     android:layout_height="match_parent"
     tools:context=".history.Anggota">
 
-
-
-
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        card_view:cardCornerRadius="15dp"
-        android:id="@+id/cardViewcoba"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="10dp">
-
-        <RelativeLayout
+        android:text="DAFTAR ANGGOTA"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"/>
+    <TableLayout
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TableRow>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginRight="10dp">
+            android:layout_weight="1"
+            android:text="Id"
+            android:textColor="@color/list_divider"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:gravity="center"/>
 
-            <TextView
-                android:id="@+id/isidata"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""/>
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+        <TextView
+            android:paddingLeft="20dp"
+            android:textColor="@color/list_divider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Anggota"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:gravity="center"/>
+    </TableRow>
+    </TableLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ListView
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/anggota1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/tambahanggotaa" />
+    <!--<Button-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:id="@+id/anggota"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:textColor="@color/list_divider"-->
+        <!--android:background="@drawable/list_row_bg_hover"-->
+        <!--android:text="Tambah Anggota"/>-->
 
+</RelativeLayout>
 </LinearLayout>

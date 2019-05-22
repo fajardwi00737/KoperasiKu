@@ -1,112 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:orientation="vertical"
-    tools:context=".input.BelanjaProduk">
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    android:layout_height="match_parent" android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp" tools:context=".input.BelanjaProduk">
+
     <TextView
-        android:id="@+id/tvnamaBarang"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nama Barang"/>
-    <EditText
-        android:id="@+id/etNamaBarang"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:inputType="text"
-        android:layout_marginBottom="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:hint="Masukkan Nama Barang" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_gravity="center_horizontal"
+        android:text="BELANJA PRODUK"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textSize="25dp"/>
+
     <TextView
-        android:id="@+id/tvnjlmhBarang"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="jumlah barang"/>
+        android:text="NamaBarang" />
+
     <EditText
-        android:id="@+id/etjmlhbarang"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:inputType="number"
-        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:hint="Masukkan Jumlah Barang" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/editTextName" />
+
     <TextView
-        android:id="@+id/tvtanggal"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" tanggal"/>
+        android:text="Jumlah" />
+
     <EditText
-        android:id="@+id/ettanggal"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:inputType="date"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:hint="Masukkan tanggal" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/editTextKamar" />
+
+
     <TextView
-        android:id="@+id/tvntotal"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nama total belanja"/>
+        android:text="Tanggal" />
     <EditText
-        android:id="@+id/ettotal"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:inputType="number"
-        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:hint="Masukkan total belanja" />
-    </android.support.design.widget.TextInputLayout>
+        android:id="@+id/editTextDaerah" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Belanja" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextTotal" />
+
     <Button
-        android:id="@+id/input"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Input"
-        android:layout_gravity="center"/>
+        android:text="Tambah Belanja"
+        android:textStyle="bold"
+        android:textColor="@color/list_divider"
+        android:background="@drawable/list_row_bg_hover"
+        android:id="@+id/buttonAdd" />
+
+    <Button
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Riwayat Belanja"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/list_divider"
+        android:background="@drawable/list_row_bg_hover"
+        android:id="@+id/buttonView" />
 
 </LinearLayout>

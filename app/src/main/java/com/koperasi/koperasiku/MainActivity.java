@@ -9,6 +9,8 @@ import android.view.MenuItem;
 
 import com.koperasi.koperasiku.Tab.MyAdapter;
 import com.koperasi.koperasiku.Tab.SlidingTabLayout;
+import com.koperasi.koperasiku.R;
+import com.koperasi.koperasiku.fragment.InputFragment;
 import com.koperasi.koperasiku.fragment.TransaksiFragment;
 
 public class MainActivity extends AppCompatActivity{
@@ -23,12 +25,11 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
 
         mViewPager= (ViewPager)findViewById(R.id.vp_tabs);
-        mViewPager.setAdapter(new MyAdapter(getSupportFragmentManager(),this));
-
+        mViewPager.setAdapter(new MyAdapter(getSupportFragmentManager(), this));
         mSlidingTabLayout=(SlidingTabLayout)findViewById(R.id.stl_tabs);
         mSlidingTabLayout.setDistributeEvenly(true);
-        mSlidingTabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
+        mSlidingTabLayout.setBackgroundColor(getResources().getColor(R.color.colorTextDefault));
+        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.list_divider));
         mSlidingTabLayout.setCustomTabView(R.layout.tab_view, R.id.tv_tab);
         mSlidingTabLayout.setViewPager(mViewPager);
     }

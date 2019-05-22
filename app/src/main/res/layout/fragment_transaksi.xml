@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
+        card_view:cardBackgroundColor="@color/colorTextDefault"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="10dp">
@@ -27,14 +29,16 @@
                 android:id="@+id/icon"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@mipmap/ic_launcher"/>
+                android:background="@drawable/pproduk"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Produk"
                 android:textStyle="bold"
+                android:textColor="@color/list_divider"
                 android:id="@+id/judul"
+                android:textSize="15dp"
                 android:layout_marginTop="8dp"
                 android:layout_toRightOf="@id/icon"
                 android:layout_marginLeft="15dp"/>
@@ -43,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lihat Produk"
                 android:id="@+id/Deskripsi"
+                android:textColor="@color/list_divider"
                 android:layout_toRightOf="@id/icon"
                 android:layout_below="@id/judul"
                 android:layout_marginTop="5dp"
@@ -56,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
+        card_view:cardBackgroundColor="@color/colorTextDefault"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="10dp">
@@ -72,13 +78,15 @@
                 android:id="@+id/icon1"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@mipmap/ic_launcher"/>
+                android:background="@drawable/anggota"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Anggota"
+                android:textSize="15dp"
                 android:textStyle="bold"
+                android:textColor="@color/list_divider"
                 android:id="@+id/judul1"
                 android:layout_marginTop="8dp"
                 android:layout_toRightOf="@id/icon1"
@@ -88,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lihat Anggota"
                 android:id="@+id/Deskripsi1"
+                android:textColor="@color/list_divider"
                 android:layout_toRightOf="@id/icon1"
                 android:layout_below="@id/judul1"
                 android:layout_marginTop="5dp"
@@ -102,6 +111,7 @@
         android:layout_height="wrap_content"
         android:elevation="5dp"
         android:layout_marginLeft="5dp"
+        card_view:cardBackgroundColor="@color/colorTextDefault"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="10dp">
 
@@ -117,14 +127,16 @@
                 android:id="@+id/icon2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@mipmap/ic_launcher"/>
+                android:background="@drawable/historytransaksi"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Transaksi"
                 android:textStyle="bold"
+                android:textSize="15dp"
                 android:id="@+id/judul2"
+                android:textColor="@color/list_divider"
                 android:layout_marginTop="8dp"
                 android:layout_toRightOf="@id/icon2"
                 android:layout_marginLeft="15dp"/>
@@ -133,6 +145,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lihat Transaksi"
                 android:id="@+id/Deskripsi2"
+                android:textColor="@color/list_divider"
                 android:layout_toRightOf="@id/icon2"
                 android:layout_below="@id/judul2"
                 android:layout_marginTop="5dp"
@@ -143,6 +156,7 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         card_view:cardCornerRadius="15dp"
         android:id="@+id/cardview3"
+        card_view:cardBackgroundColor="@color/colorTextDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
@@ -162,7 +176,7 @@
                 android:id="@+id/icon3"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@mipmap/ic_launcher"/>
+                android:background="@drawable/historysimpan"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -170,6 +184,8 @@
                 android:text="Keterangan Investasi"
                 android:textStyle="bold"
                 android:id="@+id/judul3"
+                android:textSize="15dp"
+                android:textColor="@color/list_divider"
                 android:layout_marginTop="8dp"
                 android:layout_toRightOf="@id/icon3"
                 android:layout_marginLeft="15dp"/>
@@ -178,6 +194,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lihat Keterangan Investasi"
                 android:id="@+id/Deskripsi3"
+                android:textColor="@color/list_divider"
                 android:layout_toRightOf="@id/icon3"
                 android:layout_below="@id/judul3"
                 android:layout_marginTop="5dp"
@@ -188,6 +205,7 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         card_view:cardCornerRadius="15dp"
         android:id="@+id/cardview4"
+        card_view:cardBackgroundColor="@color/colorTextDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
@@ -207,14 +225,16 @@
                 android:id="@+id/icon4"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@mipmap/ic_launcher"/>
+                android:background="@drawable/historypinjam"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Keterangan Simpan Pinjam"
                 android:textStyle="bold"
+                android:textColor="@color/list_divider"
                 android:id="@+id/judul4"
+                android:textSize="15dp"
                 android:layout_marginTop="8dp"
                 android:layout_toRightOf="@id/icon4"
                 android:layout_marginLeft="15dp"/>
@@ -223,6 +243,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lihat Keterangan Simpan Pinjam"
                 android:id="@+id/Deskripsi4"
+                android:textColor="@color/list_divider"
                 android:layout_toRightOf="@id/icon4"
                 android:layout_below="@id/judul4"
                 android:layout_marginTop="5dp"
@@ -233,6 +254,7 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         card_view:cardCornerRadius="15dp"
         android:id="@+id/cardview5"
+        card_view:cardBackgroundColor="@color/colorTextDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
@@ -251,7 +273,7 @@
                 android:id="@+id/icon5"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@mipmap/ic_launcher"/>
+                android:background="@drawable/historybelanja"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -259,6 +281,8 @@
                 android:text="History Belanja"
                 android:textStyle="bold"
                 android:id="@+id/judul5"
+                android:textSize="15dp"
+                android:textColor="@color/list_divider"
                 android:layout_marginTop="8dp"
                 android:layout_toRightOf="@id/icon5"
                 android:layout_marginLeft="15dp"/>
@@ -267,6 +291,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lihat History Belanja"
                 android:id="@+id/Deskripsi5"
+                android:textColor="@color/list_divider"
                 android:layout_toRightOf="@id/icon5"
                 android:layout_below="@id/judul5"
                 android:layout_marginTop="5dp"

@@ -1,74 +1,134 @@
 package com.koperasi.koperasiku.history;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ListView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.koperasi.koperasiku.R;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Anggota extends AppCompatActivity {
-    CardView coba;
-    private TextView textHasil;
-    private RequestQueue mQueue;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-    String url = "http://192.168.5.25/input1/input.php";
+import com.koperasi.koperasiku.R;
+import com.koperasi.koperasiku.input.RequestHandler;
+import com.koperasi.koperasiku.input.TambahAnggota;
+import com.koperasi.koperasiku.tampil.Tampilpegawa;
+import com.koperasi.koperasiku.input.konfigurasi;
+
+public class Anggota extends AppCompatActivity implements ListView.OnItemClickListener{
+    private ListView listView;
+    private Button tambahAnggota;
+    private FloatingActionButton tambahAnggota1;
+
+    private String JSON_STRING;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anggota);
+        listView = (ListView) findViewById(R.id.listView);
+        tambahAnggota1 = (FloatingActionButton)findViewById(R.id.anggota1);
+        listView.setOnItemClickListener(this);
+        getJSON();
 
-        coba = (CardView)findViewById(R.id.cardViewcoba);
-        mQueue = Volley.newRequestQueue(this);
-        textHasil = findViewById(R.id.isidata);
-
-        uraiJSON();
-
-    }
-    private void uraiJSON  (){
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        tambahAnggota1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray jsonArray = response.getJSONArray("anggota");
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject anggota = jsonArray.getJSONObject(i);
-
-                        String idanggota = anggota.getString("id_anggota");
-                        String namaanggota = anggota.getString("nama_anggota");
-                        String asaldaerah = anggota.getString("asal_daerah");
-                        String kamar = anggota.getString("kelompok_kamar");
-                        String saldo = anggota.getString("sisa_saldo");
-                        textHasil.append("id anggota : "+ idanggota+ "\nnama anggota : "+ namaanggota+ "\nAsal Daerah : "+ asaldaerah + "\nKamar : "+ kamar+"\nsisa saldo : "+saldo+"\n\n");
-                    }
-                } catch (JSONException e){
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Error oyy", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                Intent intent = new Intent(Anggota.this, TambahAnggota.class);
+                startActivity(intent);
+                finish();
             }
         });
+//        tambahAnggota.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Anggota.this, TambahAnggota.class);
+//                startActivity(intent);
+//                onStop();
+//            }
+//        });
 
-        mQueue.add(request);
+    }
+
+
+    private void showEmployee(){
+        JSONObject jsonObject = null;
+        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
+        try {
+            jsonObject = new JSONObject(JSON_STRING);
+            JSONArray result = jsonObject.getJSONArray(konfigurasi.TAG_JSON_ARRAY);
+
+            for(int i = 0; i<result.length(); i++){
+                JSONObject jo = result.getJSONObject(i);
+                String id = jo.getString(konfigurasi.TAG_ID);
+                String name = jo.getString(konfigurasi.TAG_NAMA);
+
+                HashMap<String,String> employees = new HashMap<>();
+                employees.put(konfigurasi.TAG_ID,id);
+                employees.put(konfigurasi.TAG_NAMA,name);
+                list.add(employees);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ListAdapter adapter = new SimpleAdapter(
+                Anggota.this, list, R.layout.list_item,
+                new String[]{konfigurasi.TAG_ID,konfigurasi.TAG_NAMA},
+                new int[]{R.id.id, R.id.name});
+
+        listView.setAdapter(adapter);
+    }
+
+    private void getJSON(){
+        class GetJSON extends AsyncTask<Void,Void,String>{
+
+            ProgressDialog loading;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(Anggota.this,"Mengambil Data","Mohon Tunggu...",false,false);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                JSON_STRING = s;
+                showEmployee();
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                RequestHandler rh = new RequestHandler();
+                String s = rh.sendGetRequest(konfigurasi.URL_GET_ALL);
+                return s;
+            }
+        }
+        GetJSON gj = new GetJSON();
+        gj.execute();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(this, Tampilpegawa.class);
+        HashMap<String,String> map =(HashMap)parent.getItemAtPosition(position);
+        String empId = map.get(konfigurasi.TAG_ID).toString();
+        intent.putExtra(konfigurasi.EMP_ID,empId);
+        startActivity(intent);
+        finish();
     }
 }

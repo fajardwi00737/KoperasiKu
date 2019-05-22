@@ -1,67 +1,122 @@
 package com.koperasi.koperasiku.history;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.koperasi.koperasiku.R;
+import com.koperasi.koperasiku.input.RequestHandler;
+import com.koperasi.koperasiku.input.TambahAnggota;
+import com.koperasi.koperasiku.input.TambahProduk;
+import com.koperasi.koperasiku.tampil.TampilBarang;
+import com.koperasi.koperasiku.input.konfigurasi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Produk extends AppCompatActivity {
-    private TextView textHasil;
-    private RequestQueue mQueue;
-    String url = "http://192.168.5.25/produk/show.php";
+import java.util.ArrayList;
+import java.util.HashMap;
 
+public class Produk extends AppCompatActivity implements ListView.OnItemClickListener{
+    private ListView listView;
+
+    private String JSON_STRING;
+    private FloatingActionButton tambahproduk;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produk);
-        mQueue = Volley.newRequestQueue(this);
-        textHasil = findViewById(R.id.produk);
-
-        uraiJSON();
-    }
-
-    private void uraiJSON() {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        listView = (ListView) findViewById(R.id.listView);
+        listView.setOnItemClickListener(this);
+        getJSON();
+        tambahproduk = (FloatingActionButton)findViewById(R.id.barang);
+        tambahproduk.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray jsonArray = response.getJSONArray("barang");
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject anggota = jsonArray.getJSONObject(i);
-
-                        String idBarang = anggota.getString("id_barang");
-                        String namabarang = anggota.getString("nama_barang");
-                        String hargaBarang = anggota.getString("harga_barang");
-                        String stokBarang = anggota.getString("stok_barang");
-
-                        textHasil.append("id barang : "+ idBarang+ "\nnama barang : "+ namabarang+ "\nharga barang : "+hargaBarang + "\nstok barang : "+ stokBarang+"\n\n");
-                    }
-                } catch (JSONException e){
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Error oyy", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                Intent intent = new Intent(Produk.this, TambahProduk.class);
+                startActivity(intent);
+                finish();
             }
         });
-
-        mQueue.add(request);
     }
+
+
+    private void showEmployee(){
+        JSONObject jsonObject = null;
+        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
+        try {
+            jsonObject = new JSONObject(JSON_STRING);
+            JSONArray result = jsonObject.getJSONArray(konfigurasi.TAG_JSON_ARRAY_B);
+
+            for(int i = 0; i<result.length(); i++){
+                JSONObject jo = result.getJSONObject(i);
+                String id = jo.getString(konfigurasi.TAG_ID_B);
+                String name = jo.getString(konfigurasi.TAG_NAMA_B);
+
+                HashMap<String,String> employees = new HashMap<>();
+                employees.put(konfigurasi.TAG_ID_B,id);
+                employees.put(konfigurasi.TAG_NAMA_B,name);
+                list.add(employees);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ListAdapter adapter = new SimpleAdapter(
+                Produk.this, list, R.layout.list_item,
+                new String[]{konfigurasi.TAG_ID_B,konfigurasi.TAG_NAMA_B},
+                new int[]{R.id.id, R.id.name});
+
+        listView.setAdapter(adapter);
+    }
+
+    private void getJSON(){
+        class GetJSON extends AsyncTask<Void,Void,String> {
+
+            ProgressDialog loading;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(Produk.this,"Mengambil Data","Mohon Tunggu...",false,false);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                JSON_STRING = s;
+                showEmployee();
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                RequestHandler rh = new RequestHandler();
+                String s = rh.sendGetRequest(konfigurasi.URL_GET_ALL_B);
+                return s;
+            }
+        }
+        GetJSON gj = new GetJSON();
+        gj.execute();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(this, TampilBarang.class);
+        HashMap<String,String> map =(HashMap)parent.getItemAtPosition(position);
+        String empId = map.get(konfigurasi.TAG_ID_B).toString();
+        intent.putExtra(konfigurasi.EMP_ID_B,empId);
+        startActivity(intent);
+        finish();
+    }
+
 }

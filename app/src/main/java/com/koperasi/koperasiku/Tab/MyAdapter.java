@@ -19,20 +19,26 @@ import com.koperasi.koperasiku.fragment.TransaksiFragment;
  */
 
 public class MyAdapter extends FragmentPagerAdapter {
+
     private Context mContext;
     private String[] titles ={"Input","History"};
-    int[] icon = new int[]{R.drawable.ic_launcher_background, R.drawable.ic_launcher_background};
+    int[] icon = new int[]{R.drawable.input, R.drawable.historii};
     private int heightIcon;
 
     public MyAdapter(FragmentManager fm, Context c){
         super(fm);
         mContext = c;
         double scale = c.getResources().getDisplayMetrics().density;
-        heightIcon=(int)(24*scale+0.5f);
+        heightIcon=(int)(30*scale+5f);
+    }
+
+    public MyAdapter(FragmentManager supportFragmentManager) {
+        super(supportFragmentManager);
     }
 
     @Override
     public Fragment getItem(int position) {
+
         Fragment frag= null;
 
         if(position ==0){
@@ -49,7 +55,7 @@ public class MyAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return titles.length;
+    return titles.length;
     }
 
     public CharSequence getPageTitle(int position){
@@ -63,5 +69,4 @@ public class MyAdapter extends FragmentPagerAdapter {
 
         return sp;
     }
-
 }

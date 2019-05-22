@@ -30,6 +30,7 @@ import com.android.volley.toolbox.Volley;
 import com.koperasi.koperasiku.BackgroundTask;
 import com.koperasi.koperasiku.InputTanggal;
 import com.koperasi.koperasiku.R;
+import com.koperasi.koperasiku.history.Transaksi1;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,85 +43,97 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Transaksi extends AppCompatActivity implements ListView.OnItemClickListener{
-    private ListView listView;
+public class Transaksi extends AppCompatActivity implements View.OnClickListener{
+    private EditText editTextIdA;
+    private EditText editTextIdB;
+    private EditText editTextJumlah;
+    private EditText editTextSatuan;
+    private EditText editTextTotal;
+    private EditText editTextTanggal;
+    private EditText editTextIdP;
 
-    private String JSON_STRING;
+    private Button buttonAdd;
+    private Button buttonView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaksi);
-        listView = (ListView) findViewById(R.id.listView);
-        listView.setOnItemClickListener(this);
-        getJSON();
+        editTextIdA = (EditText) findViewById(R.id.editTextIdA);
+        editTextIdB= (EditText) findViewById(R.id.editTextIdB);
+        editTextJumlah = (EditText) findViewById(R.id.editTextJumlah);
+        editTextSatuan = (EditText) findViewById(R.id.editTextSatuan);
+        editTextTotal = (EditText) findViewById(R.id.editTextTotal);
+        editTextTanggal = (EditText) findViewById(R.id.editTextTanggal);
+        editTextIdP = (EditText) findViewById(R.id.editTextIdP);
+
+
+        buttonAdd = (Button) findViewById(R.id.buttonAdd);
+        buttonView = (Button) findViewById(R.id.buttonView);
+
+        //Setting listeners to button
+        buttonAdd.setOnClickListener(this);
+        buttonView.setOnClickListener(this);
     }
 
 
-    private void showEmployee(){
-        JSONObject jsonObject = null;
-        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
-        try {
-            jsonObject = new JSONObject(JSON_STRING);
-            JSONArray result = jsonObject.getJSONArray(konfigurasi.TAG_JSON_ARRAY);
+    private void addEmployee(){
 
-            for(int i = 0; i<result.length(); i++){
-                JSONObject jo = result.getJSONObject(i);
-                String id = jo.getString(konfigurasi.TAG_ID);
-                String name = jo.getString(konfigurasi.TAG_NAMA);
+        final String IdA = editTextIdA.getText().toString().trim();
+        final String IdB = editTextIdB.getText().toString().trim();
+        final String Jumlah = editTextJumlah.getText().toString().trim();
+        final String Satuan = editTextSatuan.getText().toString().trim();
+        final String Total = editTextTotal.getText().toString().trim();
+        final String Tanggal = editTextTanggal.getText().toString().trim();
+        final String IdP = editTextIdP.getText().toString().trim();
 
-                HashMap<String,String> employees = new HashMap<>();
-                employees.put(konfigurasi.TAG_ID,id);
-                employees.put(konfigurasi.TAG_NAMA,name);
-                list.add(employees);
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        ListAdapter adapter = new SimpleAdapter(
-                Transaksi.this, list, R.layout.list_item,
-                new String[]{konfigurasi.TAG_ID,konfigurasi.TAG_NAMA},
-                new int[]{R.id.id, R.id.name});
-
-        listView.setAdapter(adapter);
-    }
-
-    private void getJSON(){
-        class GetJSON extends AsyncTask<Void,Void,String> {
+        class AddEmployee extends AsyncTask<Void,Void,String>{
 
             ProgressDialog loading;
+
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(Transaksi.this,"Mengambil Data","Mohon Tunggu...",false,false);
+                loading = ProgressDialog.show(Transaksi.this,"Menambahkan...","Tunggu...",false,false);
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                JSON_STRING = s;
-                showEmployee();
+                Toast.makeText(Transaksi.this,s,Toast.LENGTH_LONG).show();
             }
 
             @Override
-            protected String doInBackground(Void... params) {
+            protected String doInBackground(Void... v) {
+                HashMap<String,String> params = new HashMap<>();
+                params.put(konfigurasi.KEY_EMP_NAMA_T,IdA);
+                params.put(konfigurasi.KEY_EMP_KEBUTUHAN_T,IdB);
+                params.put(konfigurasi.KEY_EMP_JUMLAH_T,Jumlah);
+                params.put(konfigurasi.KEY_EMP_SATUAN_T,Satuan);
+                params.put(konfigurasi.KEY_EMP_TOTAL_T,Total);
+                params.put(konfigurasi.KEY_EMP_TANGGAL_T,Tanggal);
+                params.put(konfigurasi.KEY_EMP_PETUGAS_T,IdP);
+
+
                 RequestHandler rh = new RequestHandler();
-                String s = rh.sendGetRequest(konfigurasi.URL_GET_ALL);
-                return s;
+                String res = rh.sendPostRequest(konfigurasi.URL_ADD_T, params);
+                return res;
             }
         }
-        GetJSON gj = new GetJSON();
-        gj.execute();
+
+        AddEmployee ae = new AddEmployee();
+        ae.execute();
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(this, TampilPegawai.class);
-        HashMap<String,String> map =(HashMap)parent.getItemAtPosition(position);
-        String empId = map.get(konfigurasi.TAG_ID).toString();
-        intent.putExtra(konfigurasi.EMP_ID,empId);
-        startActivity(intent);
+    public void onClick(View v) {
+        if(v == buttonAdd){
+            addEmployee();
+        }
+
+        if(v == buttonView){
+            startActivity(new Intent(this,Transaksi1.class));
+            finish();
+        }
     }
 }
